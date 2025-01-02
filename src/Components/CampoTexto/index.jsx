@@ -1,10 +1,11 @@
-import styled from "styled-components"
+import { styled } from "styled-components"
 import search from './search.png'
 
 const ContainerEstilizado = styled.div`
     position: relative;
     display: inline-block;
-`
+`;
+
 
 const CampoTextoEstilizado = styled.input`
     height: 56px;
@@ -31,12 +32,13 @@ const IconoLupa = styled.img`
 `;
 
 const CampoTexto = () => {
+    
     return (
         <ContainerEstilizado>
-            <CampoTextoEstilizado type="text" placeholder="¿Qué estás buscando?" />
+            <CampoTextoEstilizado type="text" placeholder="¿Qué estás buscando?"/>
             <IconoLupa src={search} alt="ícono de lupa" />
         </ContainerEstilizado>
     )
 }
 
-export default CampoTexto
+export default CampoTexto;
