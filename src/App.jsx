@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import GlobalStyles from "./components/GlobalStyles"
+import GlobalStyles from "./Components/GlobalStyles"
 import Cabecera from "./components/Cabecera"
 import BarraLateral from "./components/BarraLateral"
 import Banner from "./components/Banner"
