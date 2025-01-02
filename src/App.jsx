@@ -1,14 +1,14 @@
 import styled from "styled-components"
 import GlobalStyles from "./Components/GlobalStyles"
-import Cabecera from "./components/Cabecera"
-import BarraLateral from "./components/BarraLateral"
-import Banner from "./components/Banner"
+import Cabecera from "./Components/Cabecera"
+import BarraLateral from "./Components/BarraLateral"
+import Banner from "./Components/Banner"
 import banner from "./assets/banner.png"
-import Galeria from "./components/Galeria"
+import Galeria from "./Components/Galeria"
 import fotos from "./fotos.json"
 import { useState } from "react"
-import ModalZoom from "./components/ModalZoom"
-import Pie from "./components/Pie"
+import ModalZoom from "./Components/ModalZoom"
+import Pie from "./Components/Pie"
 
 const FondoGradiente = styled.div`
 background: linear-gradient(175deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
