@@ -5,8 +5,7 @@ import BarraLateral from "./Components/BarraLateral"
 import Banner from "./Components/Banner"
 import banner from "./assets/banner.png"
 import Galeria from "./Components/Galeria"
-import fotos from "./fotos.json"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalZoom from "./Components/ModalZoom"
 import Pie from "./Components/Pie"
 
@@ -32,7 +31,9 @@ const ContenidoGaleria = styled.section`
 
 
 const App = () => {
-  const [fotosDeGaleria, setFotosDeGaleria] = useState(fotos)
+
+  const [consulta, setConsulta] = useState ("")
+  const [fotosDeGaleria, setFotosDeGaleria] = useState([])
   const [fotoSeleccionada, setFotoSeleccionada] = useState(null)
 
   const alAlternarFavorito = (foto) => {
@@ -53,21 +54,25 @@ const App = () => {
     }))
   }
 
+  useEffect(() => {
+    console.log("Creando el componente de la aplicación");
+  }, [])
 
 return (
     <>
     <FondoGradiente>
         <GlobalStyles />
         <AppContainer>
-        <Cabecera />
+        <Cabecera setConsulta={setConsulta} />
         <MainContainer>
             <BarraLateral />
             <ContenidoGaleria>
             <Banner texto="La galería más completa de fotos del espacio" backgroundImage={banner} />
-
             <Galeria alSeleccionarFoto={foto => setFotoSeleccionada(foto)} 
             fotos={fotosDeGaleria} 
-            alAlternarFavorito={alAlternarFavorito} />
+            alAlternarFavorito={alAlternarFavorito}
+            consulta = {consulta}
+            />
             </ContenidoGaleria>
         </MainContainer>
         </AppContainer>
