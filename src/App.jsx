@@ -8,6 +8,7 @@ import Galeria from "./Components/Galeria"
 import { useEffect, useState } from "react"
 import ModalZoom from "./Components/ModalZoom"
 import Pie from "./Components/Pie"
+import Cargando from "./Components/Cargando"
 
 const FondoGradiente = styled.div`
 background: linear-gradient(175deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
@@ -54,8 +55,18 @@ const App = () => {
     }))
   }
 
+  const getData = async () => {
+    const res = await fetch("http://localhost:3000/fotos");
+    const data = await res.json();
+    console.log(data)
+  }
   useEffect(() => {
-    console.log("Creando el componente de la aplicación");
+    const getData = async () => {
+      const res = await fetch("http://localhost:3000/fotos");
+      const data = await res.json();
+      setFotosDeGaleria([...data]);
+    }
+    setTimeout(() => getData(),3000);
   }, [])
 
 return (
@@ -68,11 +79,14 @@ return (
             <BarraLateral />
             <ContenidoGaleria>
             <Banner texto="La galería más completa de fotos del espacio" backgroundImage={banner} />
+            {
+            fotosDeGaleria.length == 0 ?
+            <Cargando></Cargando> :
             <Galeria alSeleccionarFoto={foto => setFotoSeleccionada(foto)} 
             fotos={fotosDeGaleria} 
             alAlternarFavorito={alAlternarFavorito}
-            consulta = {consulta}
-            />
+            consulta = {consulta} />
+            }
             </ContenidoGaleria>
         </MainContainer>
         </AppContainer>
