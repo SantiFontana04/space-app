@@ -1,13 +1,53 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const GlobalContext = createContext();
+export const GlobalContext = createContext();
 
 import React from 'react'
 
-export const GlobalContextProvider = ({children}) => {
-    const [consulta, setConsulta] = useState ("")
+const GlobalContextProvider = ({ children }) => {
+    const [consulta, setConsulta] = useState('');
+    const [fotosDeGaleria, setFotosDeGaleria] = useState([])
+    const [fotoSeleccionada, setFotoSeleccionada] = useState(null)
+
+    useEffect(() => {
+        const getData = async () => {
+            const res = await fetch('http://localhost:3000/fotos');
+            const data = await res.json();
+            setFotosDeGaleria([...data]);
+        }
+
+        setTimeout(() => getData(), 2000);
+    }, [])
+
+    const alAlternarFavorito = (foto) => {
+
+        if (foto.id === fotoSeleccionada?.id) {
+            setFotoSeleccionada({
+                ...fotoSeleccionada,
+                favorita: !fotoSeleccionada.favorita
+            })
+
+        }
+
+        setFotosDeGaleria(fotosDeGaleria.map(fotoDeGaleria => {
+            return {
+                ...fotoDeGaleria,
+                favorita: fotoDeGaleria.id === foto.id ? !foto.favorita : fotoDeGaleria.favorita
+            }
+        }))
+    }
+
+
+
     return (
-        <GlobalContext.Provider value={{ consulta, setConsulta }}>
+        <GlobalContext.Provider value={{
+            consulta,
+            setConsulta,
+            fotosDeGaleria,
+            fotoSeleccionada,
+            setFotoSeleccionada,
+            alAlternarFavorito
+        }}>
             {children}
         </GlobalContext.Provider>
     )
